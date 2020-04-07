@@ -52,16 +52,22 @@ arr = [
 # 8 + 4 + 90 + -1 + 9 + -7 + -56 + -6 + 201 + 0 + 18 = 260
 # You may use whatever programming language you'd like.
 # Verbalize your thought process as much as possible before writing any code. Run through the UPER problem solving framework while going through your thought process.
-sum = 0
+
+
 def array_min_sum(arr):
-    global sum
     nums = []
+    sum = 0
+
     for elem in arr:
         if type(elem) is int:
             nums.append(elem)
         else:
-            return sum + array_min_sum(elem)
-    if len(nums) >= 1:
+            sum += array_min_sum(elem)
+    
+    if len(nums) > 0:
         return sum + min(nums)
+    if len(nums) == 0:
+        return sum
+        
 
 print(array_min_sum(arr))

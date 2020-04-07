@@ -162,7 +162,15 @@ class HashTable:
 
         Fill this in.
         '''
-        pass
+        old_storage = self.storage
+        self.storage = [None] * 2 * self.capacity
+
+        for elem in old_storage:
+            current = elem
+            while current:
+                self.insert(current.key, current.value)
+                current = current.next
+
 
 # ht = HashTable(1)
 
