@@ -197,22 +197,37 @@ if __name__ == "__main__":
     print("Count: ", ht.count)
     print("Capacity: ", ht.capacity)
     print("Percent filled: ", storage_percent)
-
     print("")
 
-    # # Test storing beyond capacity
-    # print(ht.retrieve("line_1"))
-    # print(ht.retrieve("line_2"))
-    # print(ht.retrieve("line_3"))
+    ht.insert("line_4", "Resize to the rescue!")
+    storage_percent = ht.count / ht.capacity
+    print("Count: ", ht.count)
+    print("Capacity: ", ht.capacity)
+    print("Percent filled: ", storage_percent)
+    print("")
 
-    # Test resizing
+    ht.insert("line_5", "We can do this forever")
+    storage_percent = ht.count / ht.capacity
+    print("Count: ", ht.count)
+    print("Capacity: ", ht.capacity)
+    print("Percent filled: ", storage_percent)
+    print("")
+
+    ht.insert("line_6", "But we're not going to.")
+    storage_percent = ht.count / ht.capacity
+    print("Count: ", ht.count)
+    print("Capacity: ", ht.capacity)
+    print("Percent filled: ", storage_percent)
+    print("")
+
+    ht.insert("line_3", "Last but not least, test overwriting a key")
+    storage_percent = ht.count / ht.capacity
+    print("Count: ", ht.count)
+    print("Capacity: ", ht.capacity)
+    print("Percent filled: ", storage_percent)
+    print("")
+
+    print(ht)
+
     new_capacity = len(ht.storage)
-
     print(f"\nResized from {old_capacity} to {new_capacity}.\n")
-
-    # # Test if data intact after resizing
-    # print(ht.retrieve("line_1"))
-    # print(ht.retrieve("line_2"))
-    # print(ht.retrieve("line_3"))
-
-    # print("")
