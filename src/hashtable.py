@@ -7,6 +7,11 @@ class LinkedPair:
         self.value = value
         self.next = None
 
+
+    def __str__(self):
+        return f"({self.key}: {self.value})"
+
+
 class HashTable:
     '''
     A hash table that with `capacity` buckets
@@ -37,25 +42,14 @@ class HashTable:
 
     def _hash_mod(self, key):
         '''
-        Take an arbitrary key and return a valid integer index
+        Takes an arbitrary key and return a valid integer index
         within the storage capacity of the hash table.
         '''
         return self._hash(key) % self.capacity
 
 
     def insert(self, key, value):
-        '''
-        Store the value with the given key.
-
-        # Part 1: Hash collisions should be handled with an error warning. (Think about and
-        # investigate the impact this will have on the tests)
-
-        # Part 2: Change this so that hash collisions are handled with Linked List Chaining.
-
-        Fill this in.
-        '''
-
-        """ """
+        """ inserts a key-value pair into the hashtable. If the same key is inserted twice, the previous key-value pair is overwritten with the new value. """
         # get the hashed key modulo the capacity
         hash_val_mod = self._hash_mod(key)
 
@@ -156,14 +150,10 @@ class HashTable:
 
 
     def resize(self):
-        '''
-        Doubles the capacity of the hash table and
-        rehash all key/value pairs.
-
-        Fill this in.
-        '''
+        """ doubles capacity of storage and rehashes every value into the new storage """
         old_storage = self.storage
         self.storage = [None] * 2 * self.capacity
+        self.capacity = len(self.storage)
 
         for elem in old_storage:
             current = elem
@@ -171,50 +161,6 @@ class HashTable:
                 self.insert(current.key, current.value)
                 current = current.next
 
-
-# ht = HashTable(1)
-
-# ht.insert("key1", 1)
-# print(ht.retrieve("key1"))
-
-# ht.insert("key2", 2)
-# print(ht.retrieve("key2"))
-
-# ht.insert("key3", 3)
-# print(ht.retrieve("key3"))
-
-
-# ht.insert("key-0", "val-0")
-# ht.insert("key-1", "val-1")
-# ht.insert("key-2", "val-2")
-# ht.insert("key-3", "val-3")
-# ht.insert("key-4", "val-4")
-# ht.insert("key-5", "val-5")
-# ht.insert("key-6", "val-6")
-# ht.insert("key-7", "val-7")
-# ht.insert("key-8", "val-8")
-# ht.insert("key-9", "val-9")
-
-# return_value = ht.retrieve("key-0")
-# print(return_value)
-# return_value = ht.retrieve("key-1")
-# print(return_value)
-# return_value = ht.retrieve("key-2")
-# print(return_value)
-# return_value = ht.retrieve("key-3")
-# print(return_value)
-# return_value = ht.retrieve("key-4")
-# print(return_value)
-# return_value = ht.retrieve("key-5")
-# print(return_value)
-# return_value = ht.retrieve("key-6")
-# print(return_value)
-# return_value = ht.retrieve("key-7")
-# print(return_value)
-# return_value = ht.retrieve("key-8")
-# print(return_value)
-# return_value = ht.retrieve("key-9")
-# print(return_value)
 
 if __name__ == "__main__":
     ht = HashTable(2)
