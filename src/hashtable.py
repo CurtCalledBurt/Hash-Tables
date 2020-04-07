@@ -49,8 +49,9 @@ class HashTable:
         return self._hash(key) % self.capacity
 
 
-    def insert(self, key, value, resizing=False):
+    def insert(self, key, value):
         """ inserts a key-value pair into the hashtable. If the same key is inserted twice, the previous key-value pair is overwritten with the new value. if the hash table is too full after an insertion, the hashtable grows twice in capacity """
+        # define an overwrite check to see if the storage grew in count or stayed the same
         overwrite = False
         # get the hashed key modulo the capacity
         hash_val_mod = self._hash_mod(key)
@@ -77,12 +78,12 @@ class HashTable:
                 # increment pointer
                 current = current.next
         
-        # if we are not inserting as a part of resizing and we didn't overwrite a value, increment count by 1
-        if (resizing is False) and (overwrite is False):
+        # if we didn't overwrite a value, increment count by 1
+        if (overwrite is False):
             self.count += 1
         
-        # resize if we need to resize, and are not currently resizing
-        if (self.count / self.capacity >= 0.7) and (resizing is False):
+        # resize if we need to resize
+        if (self.count / self.capacity >= 0.7):
             self._resize()
 
 
@@ -149,6 +150,7 @@ class HashTable:
 
     def _resize(self):
         """ doubles capacity of storage and rehashes every value into the new storage """
+        self.count = 0
         old_storage = self.storage
         self.storage = [None] * (2 * self.capacity)
         self.capacity = len(self.storage)
@@ -156,7 +158,7 @@ class HashTable:
         for elem in old_storage:
             current = elem
             while current:
-                self.insert(current.key, current.value, resizing=True)
+                self.insert(current.key, current.value)
                 current = current.next
     
 
